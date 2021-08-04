@@ -1,0 +1,5 @@
+*.o
+visual_ps
+*.out
+*.dSYM/
+.*.swp

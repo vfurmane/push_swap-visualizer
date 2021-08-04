@@ -6,11 +6,14 @@
 /*   By: vfurmane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:19:22 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/04 16:19:42 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/04 16:51:54 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VISUAL_PS_H
 # define VISUAL_PS_H
+
+# include <stdio.h>
+# include "get_next_line.h"
 
 #endif

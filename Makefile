@@ -6,12 +6,13 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/14 13:23:55 by vfurmane          #+#    #+#              #
-#    Updated: 2021/08/04 16:18:41 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/08/04 16:48:50 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= visual_ps
-SRCS		= $(addprefix srcs/, main.c)
+SRCS		= $(addprefix srcs/, main.c \
+			  $(addprefix get_next_line/, get_next_line.c get_next_line_utils.c))
 OBJS		= $(SRCS:.c=.o)
 INCL		= $(addprefix -I , includes)
 CC			= clang

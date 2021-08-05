@@ -6,7 +6,7 @@
 /*   By: vfurmane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:19:22 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 12:13:50 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/05 13:32:19 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,17 @@
 #  define COLOR_RED "\e[31m"
 # endif
 
-typedef void	(*t_operation)(void);
+typedef void	(*t_operation)(int*, size_t);
 
-void	perform_pa(void);
-void	perform_pb(void);
+void	perform_px(int *stack, size_t len);
 
-void	perform_rra(void);
-void	perform_rrb(void);
-void	perform_rrr(void);
+void	perform_rrx(int *stack, size_t len);
+void	perform_rrr(int *stack, size_t len);
 
-void	perform_ra(void);
-void	perform_rb(void);
-void	perform_rr(void);
+void	perform_rx(int *stack, size_t len);
+void	perform_rr(int *stack, size_t len);
 
-void	perform_sa(void);
-void	perform_sb(void);
-void	perform_ss(void);
+void	perform_sx(int *stack, size_t len);
+void	perform_ss(int *stack, size_t len);
 
 #endif

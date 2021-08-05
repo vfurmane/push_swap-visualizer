@@ -6,16 +6,14 @@
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 12:00:36 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 12:08:53 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/05 13:33:30 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual_ps.h"
 
-void	perform_pa(void)
+void	perform_px(int *stack, size_t len)
 {
-}
-
-void	perform_pb(void)
-{
+	(void)stack;
+	(void)len;
 }

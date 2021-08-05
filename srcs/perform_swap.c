@@ -6,20 +6,20 @@
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 11:59:21 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 12:07:55 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/05 13:33:58 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual_ps.h"
 
-void	perform_sa(void)
+void	perform_sx(int *stack, size_t len)
 {
+	(void)stack;
+	(void)len;
 }
 
-void	perform_sb(void)
+void	perform_ss(int *stack, size_t len)
 {
-}
-
-void	perform_ss(void)
-{
+	(void)stack;
+	(void)len;
 }

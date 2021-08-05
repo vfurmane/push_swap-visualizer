@@ -6,7 +6,7 @@
 #    By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/14 13:23:55 by vfurmane          #+#    #+#              #
-#    Updated: 2021/08/05 12:04:02 by vfurmane         ###   ########.fr        #
+#    Updated: 2021/08/05 14:05:06 by vfurmane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS		= $(addprefix srcs/, main.c perform_push.c \
 									perform_swap.c \
 			  $(addprefix get_next_line/, get_next_line.c \
 											get_next_line_utils.c) \
-			  $(addprefix utils/, ft_strarr_index.c))
+			  $(addprefix utils/, ft_intlen.c ft_strarr_index.c))
 OBJS		= $(SRCS:.c=.o)
 INCL		= $(addprefix -I , includes)
 CC			= clang

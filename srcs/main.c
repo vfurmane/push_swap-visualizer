@@ -6,7 +6,7 @@
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:19:45 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 13:40:37 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/05 14:32:34 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,52 @@ int	perform_operation(int *stack_a, int *stack_b, size_t len,
 			operation);
 		return (-1);
 	}
-	printf("Operation '%s' is at index %d\n", operation, fct_index);
 	if (operation[strlen(operation) - 1] == 'a')
-		(operations_fct[fct_index])(stack_a, len);
+		(operations_fct[fct_index])(stack_a, stack_b, len);
 	else
-		(operations_fct[fct_index])(stack_b, len);
+		(operations_fct[fct_index])(stack_b, stack_a, len);
 	return (0);
+}
+
+size_t	longest_number_len(int *stack_a, int *stack_b, size_t len)
+{
+	size_t	i;
+	size_t	number_len;
+	size_t	longest_number;
+
+	longest_number = 0;
+	i = 0;
+	while (i < len)
+	{
+		number_len = ft_intlen(stack_a[i]);
+		if (number_len > longest_number)
+			longest_number = number_len;
+		number_len = ft_intlen(stack_b[i]);
+		if (number_len > longest_number)
+			longest_number = number_len;
+		i++;
+	}
+	return (longest_number);
+}
+
+void	print_stacks(int *stack_a, int *stack_b, size_t len)
+{
+	size_t	i;
+	size_t	longest_number;
+
+	longest_number = longest_number_len(stack_a, stack_b, len);
+	i = 0;
+	while (i < len)
+	{
+		printf("%*d | %-*d\n", (int)longest_number, stack_a[i], (int)longest_number,
+			stack_b[i]);
+		i++;
+	}
+	i = 0;
+	while (i++ < longest_number * 2 + 3)
+		putchar('-');
+	putchar('\n');
+	putchar('\n');
 }
 
 int	main(int argc, char **argv)
@@ -65,7 +105,8 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		return (1);
 	stack_a = parse_stack(argc - 1, &argv[1]);
-	stack_b = malloc((argc - 1) * sizeof (stack_b));
+	stack_b = calloc(argc - 1, sizeof (stack_b));
+	print_stacks(stack_a, stack_b, argc - 1);
 	count = 0;
 	ret = 1;
 	while (ret)
@@ -87,6 +128,9 @@ int	main(int argc, char **argv)
 			free(stack_b);
 			return (1);
 		}
+		if (!isatty(0))
+			printf("%s\n", operation);
+		print_stacks(stack_a, stack_b, argc - 1);
 		free(operation);
 		count++;
 	}

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   perform_swap.c                                     :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 11:59:21 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 14:37:45 by vfurmane         ###   ########.fr       */
+/*   Created: 2021/08/05 14:03:13 by vfurmane          #+#    #+#             */
+/*   Updated: 2021/08/05 14:04:47 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "visual_ps.h"
+#include "utils.h"
 
-void	perform_sx(int *stack_a, int *stack_b, size_t len)
+size_t	ft_intlen(int nbr)
 {
-	int	tmp;
+	int	i;
 
-	(void)len;
-	(void)stack_b;
-	tmp = stack_a[0];
-	stack_a[0] = stack_a[1];
-	stack_a[1] = tmp;
-}
-
-void	perform_ss(int *stack_a, int *stack_b, size_t len)
-{
-	perform_sx(stack_a, NULL, len);
-	perform_sx(stack_b, NULL, len);
+	if (nbr == 0)
+		return (1);
+	i = 0;
+	i += nbr < 0;
+	while (nbr)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
 }

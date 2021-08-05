@@ -6,7 +6,7 @@
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:19:45 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 13:33:06 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/05 13:40:37 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,39 @@ int	main(int argc, char **argv)
 	char		*operation;
 	int			*stack_a;
 	int			*stack_b;
+	size_t		count;
 
 	if (argc <= 1)
 		return (1);
 	stack_a = parse_stack(argc - 1, &argv[1]);
 	stack_b = malloc((argc - 1) * sizeof (stack_b));
+	count = 0;
 	ret = 1;
 	while (ret)
 	{
 		ret = get_next_line(0, &operation);
 		if (ret == -1)
+		{
+			fprintf(stderr, COLOR_RED "Unable to read stdin\n" RESET_COLOR);
+			free(stack_a);
+			free(stack_b);
+			return (1);
+		}
+		else if (ret == 0)
 			break ;
 		if (perform_operation(stack_a, stack_b, argc - 1, operation) == -1)
 		{
 			free(operation);
 			free(stack_a);
+			free(stack_b);
 			return (1);
 		}
 		free(operation);
+		count++;
 	}
+	printf("TOTAL: %zu\n", count);
+	free(operation);
 	free(stack_a);
+	free(stack_b);
 	return (0);
 }

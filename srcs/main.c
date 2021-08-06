@@ -6,7 +6,7 @@
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:19:45 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 17:35:57 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/06 11:03:51 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_stacks(t_stack_elm *stack_a, t_stack_elm *stack_b, size_t len)
 
 	longest_number = longest_number_len(stack_a, stack_b, len);
 	i = 0;
-	while (i < len)
+	while (i < len && (stack_a[i].enabled == true || stack_b[i].enabled == true))
 	{
 		if (stack_a[i].enabled)
 			printf("%*d", (int)longest_number, stack_a[i].value);

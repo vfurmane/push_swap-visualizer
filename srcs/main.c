@@ -6,54 +6,13 @@
 /*   By: vfurmane <vfurmane@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 16:19:45 by vfurmane          #+#    #+#             */
-/*   Updated: 2021/08/05 14:32:34 by vfurmane         ###   ########.fr       */
+/*   Updated: 2021/08/05 17:35:57 by vfurmane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "visual_ps.h"
 
-int	*parse_stack(int argc, char **argv)
-{
-	int	i;
-	int	*stack;
-
-	stack = calloc(argc, sizeof (*stack));
-	i = 0;
-	while (i < argc)
-	{
-		stack[i] = atoi(argv[i]);
-		i++;
-	}
-	return (stack);
-}
-
-int	perform_operation(int *stack_a, int *stack_b, size_t len,
-	const char *operation)
-{
-	int8_t				fct_index;
-	const char			*operations_list[11] = {"sa", "sb", "ss", "pa", "pb",
-												"ra", "rb", "rr", "rra", "rrb",
-												"rrr"};
-	const t_operation	operations_fct[11] = {perform_sx, perform_sx,
-										perform_ss, perform_px, perform_px,
-										perform_rx, perform_rx, perform_rr,
-										perform_rrx, perform_rrx, perform_rrr};
-
-	fct_index = ft_strarr_index(operation, operations_list, 11);
-	if (fct_index == -1)
-	{
-		fprintf(stderr, COLOR_RED "Unknown operation '%s'\n" RESET_COLOR,
-			operation);
-		return (-1);
-	}
-	if (operation[strlen(operation) - 1] == 'a')
-		(operations_fct[fct_index])(stack_a, stack_b, len);
-	else
-		(operations_fct[fct_index])(stack_b, stack_a, len);
-	return (0);
-}
-
-size_t	longest_number_len(int *stack_a, int *stack_b, size_t len)
+size_t	longest_number_len(t_stack_elm *stack_a, t_stack_elm *stack_b, size_t len)
 {
 	size_t	i;
 	size_t	number_len;
@@ -63,10 +22,10 @@ size_t	longest_number_len(int *stack_a, int *stack_b, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		number_len = ft_intlen(stack_a[i]);
+		number_len = ft_intlen(stack_a[i].value);
 		if (number_len > longest_number)
 			longest_number = number_len;
-		number_len = ft_intlen(stack_b[i]);
+		number_len = ft_intlen(stack_b[i].value);
 		if (number_len > longest_number)
 			longest_number = number_len;
 		i++;
@@ -74,7 +33,7 @@ size_t	longest_number_len(int *stack_a, int *stack_b, size_t len)
 	return (longest_number);
 }
 
-void	print_stacks(int *stack_a, int *stack_b, size_t len)
+void	print_stacks(t_stack_elm *stack_a, t_stack_elm *stack_b, size_t len)
 {
 	size_t	i;
 	size_t	longest_number;
@@ -83,8 +42,16 @@ void	print_stacks(int *stack_a, int *stack_b, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		printf("%*d | %-*d\n", (int)longest_number, stack_a[i], (int)longest_number,
-			stack_b[i]);
+		if (stack_a[i].enabled)
+			printf("%*d", (int)longest_number, stack_a[i].value);
+		else
+			printf("%*c", (int)longest_number, ' ');
+		printf(" | ");
+		if (stack_b[i].enabled)
+			printf("%*d", (int)longest_number, stack_b[i].value);
+		else
+			printf("%*c", (int)longest_number, ' ');
+		printf("\n");
 		i++;
 	}
 	i = 0;
@@ -98,8 +65,8 @@ int	main(int argc, char **argv)
 {
 	int			ret;
 	char		*operation;
-	int			*stack_a;
-	int			*stack_b;
+	t_stack_elm	*stack_a;
+	t_stack_elm	*stack_b;
 	size_t		count;
 
 	if (argc <= 1)
